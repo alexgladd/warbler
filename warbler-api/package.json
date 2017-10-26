@@ -1,0 +1,26 @@
+{
+  "name": "warbler-api",
+  "version": "1.0.0",
+  "description": "API for the Warbler app",
+  "main": "server.js",
+  "author": "Alex Gladd",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.12.4",
+    "morgan": "^1.9.0"
+  },
+  "devDependencies": {
+    "dotenv": "^4.0.0"
+  },
+  "engines": {
+    "node": "8.7.x"
+  }
+}
