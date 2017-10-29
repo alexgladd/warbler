@@ -4,9 +4,37 @@ body {
   margin: 60px 0 0 0;
   padding: 0;
   font-family: sans-serif;
+  color: #161925;
 }
 
 a {
   text-decoration: none;
   color: #044389;
+}
+
+label {
+  display: block;
+}
+
+input {
+  font-size: 1em;
+  padding: 0.5em;
+  border: 1px solid #044389;
+  border-radius: 6px;
+}
+input:focus {
+  box-shadow: 0 0 12px #7CAFC4;
+}
+
+button {
+  color: #4D7298;
+  background: white;
+  font-size: 1em;
+  padding: 0.45rem;
+  border: 1px solid #4D7298;
+  border-radius: 6px;
+  cursor: pointer;
+}
+button:focus {
+  outline: none;
 }
