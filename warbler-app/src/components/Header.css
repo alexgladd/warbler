@@ -1,0 +1,47 @@
+.Header {
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  /*height: 60px;*/
+  /*padding: 0 24px 0 24px;*/
+  box-shadow: 0 2px 8px #ccc;
+}
+
+.NavBar {
+  display: flex;
+  padding: 0.5rem 1rem;
+  align-items: center;
+}
+
+.NavBar .Brand {
+  display: inline;
+  font-size: 1.25rem;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+
+.NavBar .Logo {
+  height: 30px;
+  margin-right: 6px;
+}
+
+.NavBar-Account {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.NavBar .Button {
+  display: inline;
+  padding: 0.45rem;
+  border: 1px solid #044389;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.NavBar .Button:hover {
+  background: #044389;
+  color: white;
+}
+
+.SpaceRight {
+  margin-right: 12px;
+}
