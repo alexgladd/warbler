@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import Signup from './components/Signup';
+import Login from './components/Login';
 import './App.css';
 
 const pages = {
@@ -11,14 +12,6 @@ const Home = () => {
   return (
     <div className="Home">
       <h1>Warbler Home</h1>
-    </div>
-  );
-}
-
-const Login = () => {
-  return (
-    <div className="Home">
-      <h1>Warbler Login</h1>
     </div>
   );
 }
