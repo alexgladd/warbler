@@ -37,6 +37,16 @@ const signup = (signupParams) => {
   return fetch('/api/users', init).then(handleResponse);
 }
 
+const login = (loginParams) => {
+  const init = buildInit({
+    method: 'POST',
+    body: JSON.stringify(loginParams)
+  });
+
+  return fetch('/api/authenticate', init).then(handleResponse);
+}
+
 export default {
-  signup
+  signup,
+  login
 };
