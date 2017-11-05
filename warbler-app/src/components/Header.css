@@ -20,7 +20,7 @@
   padding-bottom: 0.25rem;
 }
 
-.NavBar .Logo {
+.NavBar .Img {
   height: 30px;
   margin-right: 6px;
 }
@@ -40,6 +40,12 @@
 .NavBar .Button:hover {
   background: #044389;
   color: white;
+}
+
+.NavBar .User {
+  display: inline;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .SpaceRight {

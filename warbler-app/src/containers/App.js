@@ -1,8 +1,10 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Signup from '../components/Signup';
 import Login from '../components/Login';
+import { logoutUser } from '../actions/user';
 import './App.css';
 
 const Home = () => {
@@ -15,9 +17,11 @@ const Home = () => {
 
 class App extends React.Component {
   render() {
+    const { user, handleLogout } = this.props;
+
     return (
       <div className="App">
-        <Header />
+        <Header user={user} handleLogout={handleLogout}/>
         <Switch>
           <Route exact path="/" component={Home}/>
           <Route exact path="/signup" component={Signup}/>
@@ -28,4 +32,12 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  handleLogout() { dispatch(logoutUser()) }
+});
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
