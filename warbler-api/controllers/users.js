@@ -7,6 +7,7 @@ exports.createNewUser = (req, res) => {
     const token = jwt.sign({ userId: user.id }, process.env.SECRET_KEY);
     res.status(201).json({
       userId: user.id,
+      username: user.username,
       profileImgUrl: user.profileImgUrl,
       token
     });
