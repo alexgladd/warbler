@@ -15,6 +15,7 @@ class Signup extends React.Component {
     }
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.checkForUser = this.checkForUser.bind(this);
   }
 
   handleInputChange(e) {
@@ -24,6 +25,22 @@ class Signup extends React.Component {
     this.setState({ [name]: value });
   }
 
+  checkForUser() {
+    const { user, history } = this.props;
+
+    if (user) {
+      history.replace('/');
+    }
+  }
+
+  componentDidMount() {
+    this.checkForUser();
+  }
+
+  componentDidUpdate(pp, ps) {
+    this.checkForUser();
+  }
+
   render () {
     const { handleSignup } = this.props;
     const { email, username, password, profileImgUrl } = this.state;
@@ -31,7 +48,7 @@ class Signup extends React.Component {
     return (
       <div className="Signup">
         <div className="SignupForm">
-          <h1>Sign up for Warbler!</h1>
+          <h1>Sign up for Warbler</h1>
 
           <label>Email</label>
           <input className="SignupInput" name="email" type="text" size="40"

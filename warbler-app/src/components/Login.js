@@ -13,6 +13,7 @@ class Login extends React.Component {
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.checkForUser = this.checkForUser.bind(this);
   }
 
   handleInputChange(e) {
@@ -22,6 +23,22 @@ class Login extends React.Component {
     this.setState({ [name]: value });
   }
 
+  checkForUser() {
+    const { user, history } = this.props;
+
+    if (user) {
+      history.replace('/');
+    }
+  }
+
+  componentDidMount() {
+    this.checkForUser();
+  }
+
+  componentDidUpdate(pp, ps) {
+    this.checkForUser();
+  }
+
   render () {
     const { handleLogin } = this.props;
     const { email, password } = this.state;
@@ -29,7 +46,7 @@ class Login extends React.Component {
     return (
       <div className="Login">
         <div className="LoginForm">
-          <h1>Log in to Warbler</h1>
+          <h1>Welcome back to Warbler</h1>
 
           <label>Email</label>
           <input className="LoginInput" name="email" type="text" size="40"
