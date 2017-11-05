@@ -9,6 +9,7 @@ exports.getAllMessages = (req, res) => {
     });
   })
   .catch(err => {
+    console.error('Failed to get all messages', err);
     res.status(500).json(err);
   });
 }

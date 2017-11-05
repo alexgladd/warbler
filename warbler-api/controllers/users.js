@@ -13,6 +13,7 @@ exports.createNewUser = (req, res) => {
     });
   })
   .catch(err => {
+    console.error('Failed to create new user', err);
     res.status(500).json(err);
   });
 }
@@ -27,10 +28,12 @@ exports.createMessage = (req, res) => {
         user: { username: user.username, profileImgUrl: user.profileImgUrl }
       });
     }).catch(err => {
+      console.error('Failed to add message to user', err);
       res.status(500).json(err);
     });
   })
   .catch(err => {
+    console.error('Failed to create new message', err);
     res.status(500).json(err);
   })
 }

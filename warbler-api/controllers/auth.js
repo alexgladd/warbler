@@ -25,6 +25,7 @@ exports.authenticate = (req, res) => {
     }
   })
   .catch(err => {
+    console.error('Failed to authenticate user', err);
     res.status(500).json(err);
   });
 }
