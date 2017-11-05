@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { signupUser } from '../actions/user';
 import './Signup.css';
-
-import api from '../util/WarblerApi';
 
 class Signup extends React.Component {
   constructor(props) {
@@ -14,17 +14,7 @@ class Signup extends React.Component {
       profileImgUrl: ''
     }
 
-    this.handleSigupSubmit = this.handleSigupSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleSigupSubmit() {
-    const req = Object.assign({}, this.state);
-    api.signup(req).then(signupData => {
-      console.log('Signup successful', signupData);
-    }).catch(errData => {
-      console.error('Signup error', errData);
-    });
   }
 
   handleInputChange(e) {
@@ -35,6 +25,9 @@ class Signup extends React.Component {
   }
 
   render () {
+    const { handleSignup } = this.props;
+    const { email, username, password, profileImgUrl } = this.state;
+
     return (
       <div className="Signup">
         <div className="SignupForm">
@@ -43,25 +36,26 @@ class Signup extends React.Component {
           <label>Email</label>
           <input className="SignupInput" name="email" type="text" size="40"
             placeholder="Enter your email address..."
-            value={this.state.email} onChange={this.handleInputChange}/>
+            value={email} onChange={this.handleInputChange}/>
 
           <label>Username</label>
           <input className="SignupInput" name="username" type="text" size="40"
             placeholder="Enter your desired username..."
-            value={this.state.username} onChange={this.handleInputChange}/>
+            value={username} onChange={this.handleInputChange}/>
 
           <label>Password</label>
           <input className="SignupInput" name="password" type="password" size="40"
             placeholder="Choose a strong password..."
-            value={this.state.password} onChange={this.handleInputChange}/>
+            value={password} onChange={this.handleInputChange}/>
 
           <label>Profile Image URL</label>
           <input className="SignupInput" name="profileImgUrl" type="text" size="40"
             placeholder="Enter a URL for your profile image..."
-            value={this.state.profileImgUrl} onChange={this.handleInputChange}/>
+            value={profileImgUrl} onChange={this.handleInputChange}/>
 
           <div>
-            <button className="BtnPrimary" type="button" onClick={this.handleSigupSubmit}>
+            <button className="BtnPrimary" type="button"
+              onClick={() => handleSignup({ email, username, password, profileImgUrl })}>
               Sign up
             </button>
           </div>
@@ -71,4 +65,12 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleSignup(signupInfo) { dispatch(signupUser(signupInfo)) }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);

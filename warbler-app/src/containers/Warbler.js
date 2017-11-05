@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { BrowserRouter as Router } from 'react-router-dom';
 import LocalStore from '../util/LocalStore';
 import reducers from '../reducers';
-import { userLogin } from '../actions/user';
+import { loginUser } from '../actions/user';
 import App from './App';
 
 const middleware = [ thunk ];
@@ -17,7 +17,7 @@ const store = createStore(
 
 let userInfo = LocalStore.getUserInfo();
 if (userInfo) {
-  store.dispatch(userLogin(userInfo));
+  store.dispatch(loginUser(userInfo));
 }
 
 const Warbler = () => (

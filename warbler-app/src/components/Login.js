@@ -1,7 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { authenticateUser } from '../actions/user';
 import './Login.css';
-
-import api from '../util/WarblerApi';
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,17 +12,7 @@ class Login extends React.Component {
       password: ''
     };
 
-    this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
-  }
-
-  handleLoginSubmit() {
-    const req = Object.assign({}, this.state);
-    api.login(req).then(loginData => {
-      console.log('Login successful', loginData);
-    }).catch(err => {
-      console.error('Login error', err);
-    });
   }
 
   handleInputChange(e) {
@@ -33,6 +23,9 @@ class Login extends React.Component {
   }
 
   render () {
+    const { handleLogin } = this.props;
+    const { email, password } = this.state;
+
     return (
       <div className="Login">
         <div className="LoginForm">
@@ -41,15 +34,16 @@ class Login extends React.Component {
           <label>Email</label>
           <input className="LoginInput" name="email" type="text" size="40"
             placeholder="Enter your user email..."
-            value={this.state.email} onChange={this.handleInputChange}/>
+            value={email} onChange={this.handleInputChange}/>
 
           <label>Password</label>
           <input className="LoginInput" name="password" type="password" size="40"
             placeholder="Enter your user password..."
-            value={this.state.password} onChange={this.handleInputChange}/>
+            value={password} onChange={this.handleInputChange}/>
 
           <div>
-            <button className="BtnPrimary" type="button" onClick={this.handleLoginSubmit}>
+            <button className="BtnPrimary" type="button"
+              onClick={() => handleLogin({ email, password })}>
               Log in
             </button>
           </div>
@@ -59,4 +53,12 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapStateToProps = state => ({
+  user: state.user
+});
+
+const mapDispatchToProps = dispatch => ({
+  handleLogin(authInfo) { dispatch(authenticateUser(authInfo)) }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
