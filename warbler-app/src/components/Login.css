@@ -1,6 +1,6 @@
 .Login {
   display: grid;
-  grid-template-rows: 100vw;
+  grid-template-rows: auto;
   grid-template-columns: 1fr 50vw 1fr;
   grid-template-areas: "... form ...";
 }
