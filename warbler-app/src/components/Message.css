@@ -1,0 +1,37 @@
+.Message {
+  width: 100%;
+  box-sizing: border-box;
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: 15% 1fr;
+  grid-template-areas:
+    "img    author"
+    "img    message"
+    "footer footer";
+  grid-gap: 12px;
+  padding: 1rem;
+}
+
+.Message .AuthorImg {
+  grid-area: img;
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #fff;
+  border-radius: 6px;
+}
+
+.Message .Author {
+  grid-area: author;
+  color: #4D7298;
+  font-weight: bold;
+}
+
+.Message .Text {
+  grid-area: message;
+}
+
+.Message .Info {
+  grid-area: footer;
+  color: #ccc;
+  text-align: right;
+}
