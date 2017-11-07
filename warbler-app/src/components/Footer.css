@@ -4,6 +4,6 @@
   width: 100vw;
   box-shadow: 0 -2px 8px #ccc;
   padding: 0.5rem 1rem;
-  align-items: center;
+  background: #fff;
   text-align: center;
 }

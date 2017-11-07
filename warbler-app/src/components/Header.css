@@ -2,9 +2,8 @@
   position: fixed;
   top: 0px;
   width: 100vw;
-  /*height: 60px;*/
-  /*padding: 0 24px 0 24px;*/
   box-shadow: 0 2px 8px #ccc;
+  background: #fff;
 }
 
 .NavBar {
