@@ -1,0 +1,31 @@
+.AuthHome {
+  width: 100vw;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 1fr 15vw 45vw 1fr;
+  grid-template-areas: "... user messages ...";
+  grid-gap: 24px;
+}
+
+.AuthHome .User {
+  grid-area: user;
+}
+
+.AuthHome .UserImg {
+  width: 100%;
+  box-sizing: border-box;
+  border: 6px solid #7CAFC4;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.AuthHome .UserName {
+  color: #4D7298;
+  font-size: 1.25rem;
+}
+
+.AuthHome .Messages {
+  grid-area: messages;
+  border: 2px solid #7CAFC4;
+  border-radius: 6px;
+}

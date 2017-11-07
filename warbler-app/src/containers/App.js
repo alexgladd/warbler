@@ -5,11 +5,13 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Signup from '../components/Signup';
 import Login from '../components/Login';
+import AuthHome from '../components/AuthHome';
 import { logoutUser } from '../actions/user';
+import { fetchMessages } from '../actions/messages';
 import hero from '../images/warbler-hero.jpg';
 import './App.css';
 
-const Home = () => {
+const PublicHome = () => {
   return (
     <div className="Home">
       <h1>Welcome to Warbler</h1>
@@ -27,14 +29,39 @@ const Home = () => {
 }
 
 class App extends React.Component {
+  componentDidMount() {
+    const { user, getMessages } = this.props;
+
+    if (user) {
+      getMessages();
+    }
+  }
+
+  componentDidUpdate() {
+    const { user, messages, getMessages } = this.props;
+
+    if (user && messages.length === 0) {
+      getMessages();
+    }
+  }
+
   render() {
-    const { user, handleLogout } = this.props;
+    const { user, messages, handleLogout } = this.props;
+
+    let homeRoute;
+    if (user) {
+      homeRoute = <Route exact path="/" render={props => (
+          <AuthHome user={user} messages={messages} {...props}/>
+        )}/>
+    } else {
+      homeRoute = <Route exact path="/" component={PublicHome}/>
+    }
 
     return (
       <div className="App">
         <Header user={user} handleLogout={handleLogout}/>
         <Switch>
-          <Route exact path="/" component={Home}/>
+          {homeRoute}
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/login" component={Login}/>
         </Switch>
@@ -45,11 +72,13 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.user
+  user: state.user,
+  messages: state.messages
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  handleLogout() { dispatch(logoutUser()) }
+  handleLogout() { dispatch(logoutUser()) },
+  getMessages() { dispatch(fetchMessages()) }
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
