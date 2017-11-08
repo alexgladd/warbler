@@ -35,3 +35,10 @@
   color: #ccc;
   text-align: right;
 }
+
+.Message:nth-child(n) {
+  border-bottom: 2px solid #7CAFC4;
+}
+.Message:last-child {
+  border-bottom: none;
+}
