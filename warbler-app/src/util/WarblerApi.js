@@ -1,16 +1,18 @@
 // warbler api abstraction
 // use native fetch for api calls
 
-const buildInit = (init={}) => {
-  const defaultHeaders = new Headers({
+const buildInit = (init={}, extraHeaders={}) => {
+  const defaultHeaders = {
     'Content-Type': 'application/json',
     'Accept': 'application/json'
-  });
+  };
+
+  const headers = new Headers(Object.assign({}, defaultHeaders, extraHeaders));
 
   const defaultInit = {
     method: 'GET',
-    headers: defaultHeaders,
-    mode: 'cors'
+    mode: 'cors',
+    headers
   };
 
   return Object.assign({}, defaultInit, init);
@@ -51,8 +53,18 @@ const getMessages = () => {
   return fetch('/api/messages', buildInit()).then(handleResponse);
 }
 
+const createMessage = (msgParams, user) => {
+  const init = buildInit(
+    { method: 'POST', body: JSON.stringify(msgParams) },
+    { 'Authorization': user.token }
+  );
+
+  return fetch(`/api/users/${user.userId}/messages`, init).then(handleResponse);
+}
+
 export default {
   signup,
   login,
-  getMessages
+  getMessages,
+  createMessage
 };

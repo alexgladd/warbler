@@ -6,8 +6,9 @@ import Footer from '../components/Footer';
 import Signup from '../components/Signup';
 import Login from '../components/Login';
 import AuthHome from '../components/AuthHome';
+import NewMessage from '../components/NewMessage';
 import { logoutUser } from '../actions/user';
-import { fetchMessages } from '../actions/messages';
+import { fetchMessages, createMessage } from '../actions/messages';
 import hero from '../images/warbler-hero.jpg';
 import './App.css';
 
@@ -29,6 +30,18 @@ const PublicHome = () => {
 }
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.handleCreateMessage = this.handleCreateMessage.bind(this);
+  }
+
+  handleCreateMessage(msgText) {
+    console.log(`Creating new message '${msgText}'`);
+    // TODO: fix the api response for creating a new message
+    return true;
+  }
+
   componentDidMount() {
     const { user, getMessages } = this.props;
 
@@ -66,6 +79,7 @@ class App extends React.Component {
           <Route exact path="/login" component={Login}/>
         </Switch>
         <Footer />
+        <NewMessage createMessage={this.handleCreateMessage}/>
       </div>
     );
   }
@@ -78,7 +92,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch) => ({
   handleLogout() { dispatch(logoutUser()) },
-  getMessages() { dispatch(fetchMessages()) }
+  getMessages() { dispatch(fetchMessages()) },
+  addMessage(msgInfo, user) { dispatch(createMessage(msgInfo, user)) }
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

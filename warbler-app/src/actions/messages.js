@@ -24,3 +24,11 @@ export const fetchMessages = () => {
       .catch(err => console.error('TODO: handle get messages errors', err));
   };
 }
+
+export const createMessage = (msgInfo, user) => {
+  return (dispatch) => {
+    api.createMessage(msgInfo, user)
+      .then(msg => dispatch(addMessage(msg)))
+      .catch(err => console.error('TODO: handle create message errors', err));
+  }
+}
