@@ -17,9 +17,11 @@ class Header extends React.Component {
           </div>
           <button className="BtnPrimary SpaceRight" type="button"
             onClick={openCompose}>
-            New message
+            <i className="fa fa-edit"></i> New message
           </button>
-          <button type="button" onClick={logout}>Log out</button>
+          <button type="button" onClick={logout}>
+            <i className="fa fa-sign-out"></i> Log out
+          </button>
         </div>
       );
     } else {
@@ -27,11 +29,11 @@ class Header extends React.Component {
         <div className="NavBar-Account">
           <button className="SpaceRight" ype="button"
             onClick={() => history.push('/signup')}>
-            Sign up
+            <i className="fa fa-user-plus"></i> Sign up
           </button>
           <button type="button"
             onClick={() => history.push('/login')}>
-            Log in
+            <i className="fa fa-sign-in"></i> Log in
           </button>
         </div>
       );

@@ -39,7 +39,9 @@ class NewMessage extends React.Component {
             <h3>Create a new message</h3>
           </div>
           <div className="Close">
-            <div className="CloseBtn" onClick={closeCompose}>&times;</div>
+            <div className="CloseBtn" onClick={closeCompose}>
+              <i className="fa fa-times-circle"></i>
+            </div>
           </div>
           <div className="TextArea">
             <textarea rows="3" placeholder="Enter your message..." value={text}
@@ -50,7 +52,7 @@ class NewMessage extends React.Component {
             <button className="BtnPrimary" type="button"
               disabled={text.length === 0 || overLimit}
               onClick={this.handleSend}>
-              Send
+              <i className="fa fa-paper-plane"></i> Send
             </button>
           </div>
         </div>

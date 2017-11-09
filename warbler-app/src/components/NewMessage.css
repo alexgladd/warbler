@@ -16,7 +16,7 @@
 .NewMessage {
   display: grid;
   grid-template-rows: auto auto auto;
-  grid-template-columns: auto min-content min-content;
+  grid-template-columns: auto min-content max-content;
   grid-template-areas:
     "title  ...... close"
     "newmsg newmsg newmsg"
@@ -62,6 +62,7 @@
   padding: 0.5em;
   border: 1px solid #044389;
   border-radius: 6px;
+  resize: none;
 }
 .NewMessage textarea:focus {
   box-shadow: 0 0 12px #7CAFC4;
