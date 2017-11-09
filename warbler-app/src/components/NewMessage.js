@@ -7,13 +7,11 @@ class NewMessage extends React.Component {
     super(props);
 
     this.state = {
-      closed: false,
       text: ''
     };
 
     this.handleTextChange = this.handleTextChange.bind(this);
     this.handleSend = this.handleSend.bind(this);
-    this.handleClose = this.handleClose.bind(this);
   }
 
   handleTextChange(e) {
@@ -22,18 +20,15 @@ class NewMessage extends React.Component {
 
   handleSend() {
     this.props.createMessage(this.state.text);
-    this.setState({ closed: true });
-  }
-
-  handleClose() {
-    this.setState({ closed: true });
+    this.setState({ text: '' });
   }
 
   render () {
-    const { closed, text } = this.state;
+    const { text } = this.state;
+    const { show, closeCompose } = this.props;
     const remChars = 160 - text.length;
 
-    const modalClasses = closed ? 'Modal' : 'Modal ModalShow';
+    const modalClasses = show ? 'Modal ModalShow' : 'Modal';
     const overLimit = remChars < 0;
     const limitClasses = overLimit ? 'CharLimit CharLimitReached' : 'CharLimit';
 
@@ -44,7 +39,7 @@ class NewMessage extends React.Component {
             <h3>Create a new message</h3>
           </div>
           <div className="Close">
-            <div className="CloseBtn" onClick={this.handleClose}>&times;</div>
+            <div className="CloseBtn" onClick={closeCompose}>&times;</div>
           </div>
           <div className="TextArea">
             <textarea rows="3" placeholder="Enter your message..." value={text}
@@ -65,6 +60,8 @@ class NewMessage extends React.Component {
 }
 
 NewMessage.propTypes = {
+  show: PropTypes.bool.isRequired,
+  closeCompose: PropTypes.func.isRequired,
   createMessage: PropTypes.func.isRequired
 };
 

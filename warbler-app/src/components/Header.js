@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-// import PropTypes from 'prop-types';
+import { Link, withRouter } from 'react-router-dom';
 import './Header.css';
 import logo from '../images/warbler-logo.png';
 
 class Header extends React.Component {
   render () {
-    const { user, handleLogout } = this.props;
+    const { user, openCompose, logout, history } = this.props;
 
     let accountSection;
     if (user) {
@@ -16,14 +15,24 @@ class Header extends React.Component {
           <div className="User SpaceRight">
             {user.username}
           </div>
-          <a className="Button" onClick={() => handleLogout()}>Log out</a>
+          <button className="BtnPrimary SpaceRight" type="button"
+            onClick={openCompose}>
+            New message
+          </button>
+          <button type="button" onClick={logout}>Log out</button>
         </div>
       );
     } else {
       accountSection = (
         <div className="NavBar-Account">
-          <Link className="Button SpaceRight" to="/signup">Sign up</Link>
-          <Link className="Button" to="/login">Log in</Link>
+          <button className="SpaceRight" ype="button"
+            onClick={() => history.push('/signup')}>
+            Sign up
+          </button>
+          <button type="button"
+            onClick={() => history.push('/login')}>
+            Log in
+          </button>
         </div>
       );
     }
@@ -46,7 +55,8 @@ class Header extends React.Component {
 
 Header.propTypes = {
   user: PropTypes.object,
-  handleLogout: PropTypes.func.isRequired
+  openCompose: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired
 };
 
-export default Header;
+export default withRouter(Header);

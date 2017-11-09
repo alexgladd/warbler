@@ -35,6 +35,23 @@ button {
   border-radius: 6px;
   cursor: pointer;
 }
+button:hover {
+  border: 1px solid #044389;
+  background: #044389;
+  color: white;
+}
 button:focus {
   outline: none;
+}
+button:disabled {
+  color: #999;
+  background: #ccc;
+  border: 1px solid #999;
+  cursor: not-allowed;
+}
+button:disabled:hover {
+  color: #999;
+  background: #ccc;
+  border: 1px solid #999;
+  cursor: not-allowed;
 }

@@ -24,7 +24,6 @@ const PublicHome = () => {
       <h3>
         <Link to="/login">Log in</Link> or <Link to="/signup">Sign up</Link> to get started
       </h3>
-
     </div>
   );
 }
@@ -33,11 +32,26 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      composing: false
+    };
+
+    this.handleOpenCompose = this.handleOpenCompose.bind(this);
+    this.handleCloseCompose = this.handleCloseCompose.bind(this);
     this.handleCreateMessage = this.handleCreateMessage.bind(this);
+  }
+
+  handleOpenCompose() {
+    this.setState({ composing: true });
+  }
+
+  handleCloseCompose() {
+    this.setState({ composing: false });
   }
 
   handleCreateMessage(msgText) {
     this.props.addMessage({ text: msgText }, this.props.user);
+    this.setState({ composing: false });
   }
 
   componentDidMount() {
@@ -57,6 +71,7 @@ class App extends React.Component {
   }
 
   render() {
+    const { composing } = this.state;
     const { user, messages, handleLogout } = this.props;
 
     let homeRoute;
@@ -70,14 +85,15 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Header user={user} handleLogout={handleLogout}/>
+        <Header user={user} openCompose={this.handleOpenCompose} logout={handleLogout}/>
         <Switch>
           {homeRoute}
           <Route exact path="/signup" component={Signup}/>
           <Route exact path="/login" component={Login}/>
         </Switch>
         <Footer />
-        <NewMessage createMessage={this.handleCreateMessage}/>
+        <NewMessage show={composing} createMessage={this.handleCreateMessage}
+          closeCompose={this.handleCloseCompose}/>
       </div>
     );
   }
