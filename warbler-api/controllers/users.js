@@ -23,10 +23,8 @@ exports.createMessage = (req, res) => {
   .then(message => {
     req.user.messages.push(message);
     req.user.save().then(user => {
-      res.status(201).json({
-        message,
-        user: { username: user.username, profileImgUrl: user.profileImgUrl }
-      });
+      res.status(201).json(Object.assign({}, message.toObject(),
+        { author: { _id: user.id, username: user.username, profileImgUrl: user.profileImgUrl} }));
     }).catch(err => {
       console.error('Failed to add message to user', err);
       res.status(500).json(err);
