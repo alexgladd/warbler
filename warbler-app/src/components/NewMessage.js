@@ -21,9 +21,8 @@ class NewMessage extends React.Component {
   }
 
   handleSend() {
-    if (this.props.createMessage(this.state.text)) {
-      this.setState({ closed: true });
-    }
+    this.props.createMessage(this.state.text);
+    this.setState({ closed: true });
   }
 
   handleClose() {
@@ -35,9 +34,9 @@ class NewMessage extends React.Component {
     const remChars = 160 - text.length;
 
     const modalClasses = closed ? 'Modal' : 'Modal ModalShow';
-    const limitClasses = (remChars < 0) ? 'CharLimit CharLimitReached' : 'CharLimit';
+    const overLimit = remChars < 0;
+    const limitClasses = overLimit ? 'CharLimit CharLimitReached' : 'CharLimit';
 
-    // TODO: disable button if entry is empty or over the char limit
     return (
       <div className={modalClasses}>
         <div className="NewMessage">
@@ -54,6 +53,7 @@ class NewMessage extends React.Component {
           <div className={limitClasses}>{remChars}</div>
           <div className="SendMsg">
             <button className="BtnPrimary" type="button"
+              disabled={text.length === 0 || overLimit}
               onClick={this.handleSend}>
               Send
             </button>

@@ -56,7 +56,7 @@ const getMessages = () => {
 const createMessage = (msgParams, user) => {
   const init = buildInit(
     { method: 'POST', body: JSON.stringify(msgParams) },
-    { 'Authorization': user.token }
+    { 'Authorization': `Bearer ${user.token}` }
   );
 
   return fetch(`/api/users/${user.userId}/messages`, init).then(handleResponse);

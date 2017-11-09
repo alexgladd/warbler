@@ -38,3 +38,8 @@
   border: 1px solid #044389;
   background: #044389;
 }
+.BtnPrimary:disabled {
+  color: #999;
+  background: #ccc;
+  cursor: not-allowed;
+}

@@ -37,9 +37,7 @@ class App extends React.Component {
   }
 
   handleCreateMessage(msgText) {
-    console.log(`Creating new message '${msgText}'`);
-    // TODO: fix the api response for creating a new message
-    return true;
+    this.props.addMessage({ text: msgText }, this.props.user);
   }
 
   componentDidMount() {
