@@ -20,9 +20,14 @@ if (userInfo) {
   store.dispatch(loginUser(userInfo));
 }
 
+let basePath = '/';
+if (process.env.NODE_ENV === 'production') {
+  basePath = '/warbler';
+}
+
 const Warbler = () => (
   <Provider store={store}>
-    <Router>
+    <Router basename={basePath}>
       <App />
     </Router>
   </Provider>
