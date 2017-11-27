@@ -7,8 +7,10 @@ import Signup from '../components/Signup';
 import Login from '../components/Login';
 import AuthHome from '../components/AuthHome';
 import NewMessage from '../components/NewMessage';
+import Alert from '../components/Alert';
 import { logoutUser } from '../actions/user';
 import { fetchMessages, createMessage } from '../actions/messages';
+import { clearError } from '../actions/errors';
 import hero from '../images/warbler-hero.jpg';
 import './App.css';
 
@@ -72,7 +74,7 @@ class App extends React.Component {
 
   render() {
     const { composing } = this.state;
-    const { user, messages, handleLogout } = this.props;
+    const { user, messages, error, handleLogout, clearAlert } = this.props;
 
     let homeRoute;
     if (user) {
@@ -86,6 +88,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header user={user} openCompose={this.handleOpenCompose} logout={handleLogout}/>
+        { error && <Alert msg={error.message} onClose={clearAlert} /> }
         <Switch>
           {homeRoute}
           <Route exact path="/signup" component={Signup}/>
@@ -108,7 +111,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
   handleLogout() { dispatch(logoutUser()) },
   getMessages() { dispatch(fetchMessages()) },
-  addMessage(msgInfo, user) { dispatch(createMessage(msgInfo, user)) }
+  addMessage(msgInfo, user) { dispatch(createMessage(msgInfo, user)) },
+  clearAlert() { dispatch(clearError()) }
 });
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

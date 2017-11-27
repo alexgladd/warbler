@@ -1,0 +1,25 @@
+.AlertOverlay {
+  position: fixed;
+  top: 60px;
+  width: 100vw;
+  z-index: 1;
+}
+
+.Alert {
+  width: 50vw;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #DB504A;
+  border: 2px solid #C84944;
+  border-radius: 6px;
+  color: #ddd;
+}
+
+.Alert .Close {
+  float: right;
+  cursor: pointer;
+  color: #ccc;
+}
+.Alert .Close:hover {
+  color: #aaa;
+}

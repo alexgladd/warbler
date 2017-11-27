@@ -26,7 +26,7 @@ const handleResponse = (response) => {
       throw errData;
     });
   } else {
-    const err = { error: "The API server encountered an error or isn't responding" };
+    const err = { message: "The API server encountered an error or isn't responding" };
     throw err;
   }
 }
