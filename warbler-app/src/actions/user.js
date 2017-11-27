@@ -2,6 +2,7 @@
 
 import api from '../util/WarblerApi';
 import LocalStore from '../util/LocalStore';
+import { ErrorSources, setError } from './errors';
 
 export const UserActions = {
   login: 'USER_LOGIN',
@@ -23,7 +24,7 @@ export const authenticateUser = (authInfo) => {
       LocalStore.setUserInfo(userInfo);
       dispatch(loginUser(userInfo))
     }).catch(err => {
-      console.error('TODO: handle authenticate errors', err);
+      dispatch(setError({ ...err, src: ErrorSources.login }));
     });
   };
 }
@@ -34,7 +35,7 @@ export const signupUser = (signupInfo) => {
       LocalStore.setUserInfo(userInfo);
       dispatch(loginUser(userInfo));
     }).catch(err => {
-      console.error('TODO: handle signup errors', err);
+      dispatch(setError({ ...err, src: ErrorSources.signup }));
     });
   };
 }

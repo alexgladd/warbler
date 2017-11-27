@@ -101,7 +101,8 @@ class App extends React.Component {
 
 const mapStateToProps = state => ({
   user: state.user,
-  messages: state.messages
+  messages: state.messages,
+  error: state.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

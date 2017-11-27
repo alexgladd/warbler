@@ -1,6 +1,7 @@
 // warbler messages actions
 
 import api from '../util/WarblerApi';
+import { ErrorSources, setError } from './errors';
 
 export const MessagesActions = {
   load: 'LOAD_MESSAGES',
@@ -21,7 +22,7 @@ export const fetchMessages = () => {
   return (dispatch) => {
     api.getMessages()
       .then(res => dispatch(loadMessages(res.messages)))
-      .catch(err => console.error('TODO: handle get messages errors', err));
+      .catch(err => dispatch(setError({ ...err, src: ErrorSources.getMessages })));
   };
 }
 
@@ -29,6 +30,6 @@ export const createMessage = (msgInfo, user) => {
   return (dispatch) => {
     api.createMessage(msgInfo, user)
       .then(msg => dispatch(addMessage(msg)))
-      .catch(err => console.error('TODO: handle create message errors', err));
+      .catch(err => dispatch(setError({ ...err, src: ErrorSources.addMessage })));
   }
 }
