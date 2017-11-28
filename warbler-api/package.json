@@ -21,6 +21,6 @@
     "dotenv": "^4.0.0"
   },
   "engines": {
-    "node": "8.7.x"
+    "node": "8.x"
   }
 }
