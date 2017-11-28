@@ -15,6 +15,9 @@ const app = express();
 app.set('port', process.env.PORT || 8080);
 
 if (process.env.NODE_ENV === 'production') {
+  const cors = require('cors');
+  app.use(cors({ origin: 'https://alexgladd.github.io' }));
+
   app.use(morgan('common'));
 } else {
   app.use(morgan('dev'));
