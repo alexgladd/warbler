@@ -14,7 +14,14 @@ exports.createNewUser = (req, res) => {
   })
   .catch(err => {
     console.error('Failed to create new user', err);
-    res.status(500).json(err);
+
+    // decide how to respond
+    if (err.name === 'MongoError' && err.code === 11000) {
+      // duplicate key
+      res.status(409).json({ message: 'A user with that email or username already exists' });
+    } else {
+      res.status(500).json({ message: 'Encountered a problem creating a new user' });
+    }
   });
 }
 
@@ -27,11 +34,11 @@ exports.createMessage = (req, res) => {
         { author: { _id: user.id, username: user.username, profileImgUrl: user.profileImgUrl} }));
     }).catch(err => {
       console.error('Failed to add message to user', err);
-      res.status(500).json(err);
+      res.status(500).json({ message: 'Encountered a problem creating the new message' });
     });
   })
   .catch(err => {
     console.error('Failed to create new message', err);
-    res.status(500).json(err);
+    res.status(500).json({ message: 'Encountered a problem creating the new message' });
   })
 }
