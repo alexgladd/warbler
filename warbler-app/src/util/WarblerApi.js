@@ -21,9 +21,14 @@ const buildInit = (init={}, extraHeaders={}) => {
 const handleResponse = (response) => {
   if (response.ok) {
     return response.json();
-  } else if (response.status >= 400 && response.status < 500) {
+  } else if (response.status >= 400 && response.status <= 500) {
     return response.json().then(errData => {
-      throw errData;
+      if (errData && errData.message) {
+        throw errData;
+      } else {
+        const err = { message: "The API server encountered an error or isn't responding" };
+        throw err;
+      }
     });
   } else {
     const err = { message: "The API server encountered an error or isn't responding" };
