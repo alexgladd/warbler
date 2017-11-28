@@ -1,6 +1,13 @@
 // warbler api abstraction
 // use native fetch for api calls
 
+let rootUrl;
+if (process.env.NODE_ENV === 'production') {
+  rootUrl = 'https://agladd-warbler.herokuapp.com';
+} else {
+  rootUrl = '';
+}
+
 const buildInit = (init={}, extraHeaders={}) => {
   const defaultHeaders = {
     'Content-Type': 'application/json',
@@ -42,7 +49,7 @@ const signup = (signupParams) => {
     body: JSON.stringify(signupParams)
   });
 
-  return fetch('/api/users', init).then(handleResponse);
+  return fetch(`${rootUrl}/api/users`, init).then(handleResponse);
 }
 
 const login = (loginParams) => {
@@ -51,11 +58,11 @@ const login = (loginParams) => {
     body: JSON.stringify(loginParams)
   });
 
-  return fetch('/api/authenticate', init).then(handleResponse);
+  return fetch(`${rootUrl}/api/authenticate`, init).then(handleResponse);
 }
 
 const getMessages = () => {
-  return fetch('/api/messages', buildInit()).then(handleResponse);
+  return fetch(`${rootUrl}/api/messages`, buildInit()).then(handleResponse);
 }
 
 const createMessage = (msgParams, user) => {
@@ -64,7 +71,7 @@ const createMessage = (msgParams, user) => {
     { 'Authorization': `Bearer ${user.token}` }
   );
 
-  return fetch(`/api/users/${user.userId}/messages`, init).then(handleResponse);
+  return fetch(`${rootUrl}/api/users/${user.userId}/messages`, init).then(handleResponse);
 }
 
 export default {
